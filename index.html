@@ -1,0 +1,266 @@
+
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Developer Project</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3ff;
+      color: #24213b;
+    }
+
+    header {
+      background: #6c4cf1;
+      color: white;
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    header h2 {
+      margin: 0;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    main {
+      width: min(900px, 92%);
+      margin: 45px auto;
+    }
+
+    .hero, .card {
+      background: white;
+      padding: 28px;
+      border-radius: 18px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 28px #28204b0d;
+    }
+
+    .hero {
+      text-align: center;
+      background: linear-gradient(135deg, #eee9ff, #ffffff);
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 12px;
+    }
+
+    .hero p, .muted {
+      color: #69657b;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 16px 0 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d8d3e8;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 10px;
+      background: #6c4cf1;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 8px 6px 0 0;
+    }
+
+    button:hover {
+      opacity: 0.88;
+    }
+
+    .secondary {
+      background: #eee9ff;
+      color: #5136cb;
+    }
+
+    .examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    #output {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f5f3ff;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #69657b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>✦ AI Developer</h2>
+    <a href="#prompt-tool">Prompt Studio</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Build something amazing with AI ✨</h1>
+      <p>Welcome! I'm learning AI and web development.
+      This is my space to explore ideas and create useful projects.</p>
+      <p><strong>My goal:</strong> Become an AI Developer</p>
+    </section>
+
+    <section class="card" id="prompt-tool">
+      <h2>AI Prompt Studio</h2>
+      <p class="muted">Choose an example or enter your own topic to create a useful prompt.</p>
+
+      <label for="topic">What topic do you want to explore?</label>
+      <input id="topic" type="text" placeholder="e.g. AI, coding, fitness">
+
+      <div class="examples">
+        <button class="secondary" onclick="chooseTopic('AI')">AI</button>
+        <button class="secondary" onclick="chooseTopic('Coding')">Coding</button>
+        <button class="secondary" onclick="chooseTopic('Fitness')">Fitness</button>
+      </div>
+
+      <label for="style">Choose a prompt type</label>
+      <select id="style" style="width:100%;padding:14px;border:1px solid #d8d3e8;border-radius:10px;font-size:16px;">
+        <option value="beginner-friendly explanation">Beginner explanation</option>
+        <option value="step-by-step tutorial">Step-by-step tutorial</option>
+        <option value="creative project idea">Creative project idea</option>
+        <option value="social media post">Social media post</option>
+      </select>
+
+      <button onclick="generatePrompt()">Generate Prompt</button>
+      <button class="secondary" onclick="clearPrompt()">Clear</button>
+
+      <div id="output" aria-live="polite">Your generated prompt will appear here.</div>
+      <button class="secondary" id="copyButton" onclick="copyPrompt()">Copy Prompt</button>
+      <p id="status" class="muted" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>My Learning Journey 🚀</h2>
+      <p>I'm learning by building projects, exploring new tools,
+      and practising problem-solving.</p>
+      <ul>
+        <li>HTML and web design</li>
+        <li>JavaScript fundamentals</li>
+        <li>AI-powered applications</li>
+        <li>Building a freelance portfolio</li>
+      </ul>
+    </section>
+  </main>
+
+ 
+<script>
+function chooseTopic(topic) {
+  document.getElementById("topic").value = topic;
+  document.getElementById("status").textContent = "";
+}
+
+function generatePrompt() {
+  const topic = document.getElementById("topic").value.trim();
+  const style = document.getElementById("style").value;
+  const output = document.getElementById("output");
+  const status = document.getElementById("status");
+
+  if (!topic) {
+    output.textContent = "Please enter a topic first.";
+    status.textContent = "";
+    return;
+  }
+
+  if (
+    topic.toLowerCase() === "ai" ||
+    topic.toLowerCase() === "artificial intelligence"
+  ) {
+    output.textContent =
+      "What is Artificial Intelligence (AI)?\n\n" +
+      "AI is technology that helps computers perform tasks " +
+      "that usually need human intelligence.\n\n" +
+      "1. How AI works:\n" +
+      "AI learns patterns from examples to answer questions, " +
+      "recognise images, and make suggestions.\n\n" +
+      "2. Everyday examples:\n" +
+      "- Voice assistants that answer questions.\n" +
+      "- Maps that suggest routes.\n" +
+      "- Chatbots that explain topics.\n\n" +
+      "3. How you can use AI:\n" +
+      "- Learn about new topics.\n" +
+      "- Brainstorm project ideas.\n" +
+      "- Understand code.\n\n" +
+      "4. Remember:\n" +
+      "AI can make mistakes, so check important information.";
+  } else {
+    output.textContent =
+      "Create a " + style + " about " + topic + ".\n\n" +
+      "1. Explain the basics of " + topic + ".\n\n" +
+      "2. Give practical examples.\n\n" +
+      "3. Suggest a small activity related to " + topic + ".\n\n" +
+      "4. Summarise what was learned and suggest ways to practise.";
+  }
+
+  status.textContent = "Explanation created successfully!";
+}
+
+function clearPrompt() {
+  document.getElementById("topic").value = "";
+  document.getElementById("output").textContent =
+    "Your generated prompt will appear here.";
+  document.getElementById("status").textContent = "";
+  document.getElementById("style").selectedIndex = 0;
+}
+
+async function copyPrompt() {
+  const output = document.getElementById("output").textContent;
+  const status = document.getElementById("status");
+
+  if (
+    !output ||
+    output === "Your generated prompt will appear here." ||
+    output === "Please enter a topic first."
+  ) {
+    status.textContent = "Generate an explanation before copying.";
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(output);
+    status.textContent = "Copied successfully!";
+  } catch (error) {
+    status.textContent =
+      "Copy isn't available here. Select the text and copy it manually.";
+  }
+}
+</script>
+
+<footer>Made with curiosity and a little AI ✦</footer>
+</body>
+</html>
